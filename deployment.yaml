@@ -9,33 +9,27 @@ metadata:
 spec:
   replicas: 2
   revisionHistoryLimit: 3
-
   selector:
     matchLabels:
       app: java-tomcat-app
-
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
-
   template:
     metadata:
       labels:
         app: java-tomcat-app
-
     spec:
       containers:
         - name: java-tomcat-app
-          image: ashrayp18/java-tomcat-app:sha-f67e103
+          image: ashrayp18/java-tomcat-app:sha-3174f87
           imagePullPolicy: IfNotPresent
-
           ports:
             - name: http
               containerPort: 8080
               protocol: TCP
-
           resources:
             requests:
               cpu: 100m
@@ -43,7 +37,6 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
-
           readinessProbe:
             httpGet:
               path: /
@@ -52,7 +45,6 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 2
             failureThreshold: 6
-
           livenessProbe:
             httpGet:
               path: /
